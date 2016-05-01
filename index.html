@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link rel="stylesheet" href="anima.css">
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "\5FAE\8F6F\96C5\9ED1", Helvetica, sans-serif;
+            font-size: 12px;
+            color: #424242;
+
+            /*移动端常用的CSS公共样式*/
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            -webkit-touch-callout: none;
+            -webkit-overflow-scrolling: touch;
+            -webkit-text-size-adjust: 100%;
+            -webkit-user-select: none;
+        }
+        html,body{
+            height: 100%;
+            overflow: hidden;
+        }
+        #main{
+            width: 640px;
+            height: 960px;
+            position: absolute;
+            left:50%;
+            top:0;
+            margin-left: -320px;
+            transform-origin: top;
+            -webkit-transform-origin: top;
+        }
+        #list{
+            width: 100%;
+            height: 100%;
+
+        }
+        #list li{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #2d2d2d;
+            font-size: 40px;
+            text-align: center;
+            display: none;
+            z-index: 4;
+        }
+        .react{
+            position: absolute;
+            border: 2px solid rgb(0, 0, 0);
+            width: 40%;
+            color: rgb(103, 103, 103);
+            font-weight: bold;
+            font-size: 48px;
+            height: 8%;
+          left: 50%;
+            text-align: center;
+            vertical-align: middle;
+            margin-left: -20%;
+            line-height: 67px;
+            top:10%;
+            font-family: zhanku_happy;
+        }
+        #list li:nth-child(1){
+            background:#fcf08e;
+            display: block;
+        }
+        #list li:nth-child(2){
+            background:#fcf08e;
+        }
+        #list li:nth-child(3){
+            background: #fcf08e;
+        }
+        #list li:nth-child(4){
+            background: #fcf08e;
+        }
+
+        #list li.zIndex{
+            z-index: 6;
+        }
+
+
+
+        .vita h1{
+            font-size: 58px;
+            line-height: 108px;
+            color: rgb(103, 103, 103);
+            width: 30px;
+            position: absolute;
+            z-index: 4;
+            left: 45%;
+            top: 18%;
+        }
+        .vita h1:nth-child(2){
+            top: 61%;
+
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: white;
+        }
+
+        .loader {
+            height: 150px;
+            width: 150px;
+            margin: 0 auto;
+            margin-top: 402px;
+            transform: rotate(-45deg);
+            font-size: 0;
+            line-height: 0;
+            animation: rotate-loader 5s infinite;
+            padding: 25px;
+            border: 1px solid teal;
+            z-index: 18;
+            position: relative;
+        }
+
+        .segment-holder {
+            position: relative;
+            display: inline-block;
+            width: 50%;
+            height: 50%;
+        }
+
+        .segment {
+            position: absolute;
+            background: teal;
+        }
+
+        .one {
+            bottom: 0;
+            height: 0;
+            width: 100%;
+            animation: slide-one 1s infinite;
+        }
+
+        .two {
+            left: 0;
+            height: 100%;
+            width: 0;
+            animation: slide-two 1s infinite;
+            animation-delay: 0.25s;
+        }
+
+        .three {
+            right: 0;
+            height: 100%;
+            width: 0;
+            animation: slide-two 1s infinite;
+            animation-delay: 0.75s;
+        }
+
+        .four {
+            top: 0;
+            height: 0;
+            width: 100%;
+            animation: slide-one 1s infinite;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes slide-one {
+            0%    { height: 0;    opacity: 1; }
+            12.5% { height: 100%; opacity: 1; }
+            50%   { opacity: 1; }
+            100%  { height: 100%; opacity: 0;}
+        }
+
+        @keyframes slide-two {
+            0%    { width: 0;    opacity: 1; }
+            12.5% { width: 100%; opacity: 1; }
+            50%   { opacity: 1; }
+            100%  { width: 100%; opacity: 0;}
+        }
+
+        @keyframes rotate-loader {
+            0%   { transform: rotate(-45deg); }
+            20%  { transform: rotate(-45deg); }
+            25%  { transform: rotate(-135deg); }
+            45%  { transform: rotate(-135deg); }
+            50%  { transform: rotate(-225deg); }
+            70%  { transform: rotate(-225deg); }
+            75%  { transform: rotate(-315deg); }
+            95%  { transform: rotate(-315deg); }
+            100% { transform: rotate(-405deg); }
+        }
+
+        *,
+        *::after,
+        *::before {
+            box-sizing: border-box;
+        }
+        body {
+            transform-style: preserve-3d;
+            perspective: 500px;
+            height:100vh;
+            width: 100vw;
+            margin: 0;
+            background: radial-gradient(circle at 50% 50%,#fff 20%, #7EC0EE 200%);
+            overflow: hidden;
+        }
+        #container {
+            position:absolute;
+            top: 15%;
+            left:50%;
+            width:200px;
+            height:200px;
+            margin: -100px 0 0 -100px;
+            border-radius: 50%;
+            animation: rotate 10s linear infinite;
+            transform-style: preserve-3d
+        }
+        #container::after {
+            content:'';
+            position:absolute;
+            width:140px;
+            height:140px;
+            border-radius: 50%;
+            border-width:30px;
+            border-style:solid;
+            border-color:#fb7d00 #fdb402;
+            transform: rotate(45deg);
+            box-shadow: 0 0 0 5px #fff, inset 0 0 0 5px #fff;
+            background: radial-gradient(circle at 50% 50%,rgba(255,255,255,1) 14px,transparent 14px);
+            top:30px;
+            left:30px;
+            animation: rotate 5s linear reverse infinite;
+        }
+        .quarter {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: #f55901;
+            transition: all .5s;
+        }
+        #item1 {
+            top: 0;
+            left: 0;
+            border-top-left-radius: 100% 100%;
+            animation: angle1 10s linear infinite;
+        }
+        #item2 {
+            top: 0;
+            right: 0;
+            background: #faaa00;
+            border-top-right-radius: 100% 100%;
+            animation: angle2 10s linear 7.5s infinite;
+        }
+        #item3 {
+            bottom: 0;
+            right: 0;
+            border-bottom-right-radius: 100% 100%;
+            animation: angle3 10s linear 5s infinite;
+        }
+        #item4 {
+            bottom: 0;
+            left: 0;
+            background: #faaa00;
+            border-bottom-left-radius: 100% 100%;
+            animation: angle4 10s linear 2.5s infinite;
+        }
+
+        #container:hover,
+        #container:hover:after,
+        #container:hover div {
+        //animation-play-state: paused;
+        }
+        #container:hover #item1 {
+            transform: translate(-5px, -5px);
+        }
+        #container:hover #item2 {
+            transform: translate(5px, -5px);
+        }
+        #container:hover #item3 {
+            transform: translate(5px, 5px);
+        }
+        #container:hover #item4 {
+            transform: translate(-5px, 5px);
+        }
+
+        @keyframes rotate {
+            0% {transform: rotateZ(0deg)}
+            50% {transform: rotateZ(180deg)}
+            100% {transform: rotateZ(360deg)}
+        }
+
+        @keyframes angle1 {
+            0%,25%,100% {border-top-left-radius: 100% 100%}
+            12% {border-top-left-radius: 0% 100%}
+            12.5% {border-top-left-radius: 0% 0%}
+            13% {border-top-left-radius: 100% 0%}
+        }
+
+        @keyframes angle2 {
+            0%,25%,100% {border-top-right-radius: 100% 100%}
+            12% {border-top-right-radius: 100% 0%}
+            12.5% {border-top-right-radius: 0% 0%}
+            13% {border-top-right-radius: 0% 100%}
+        }
+
+        @keyframes angle3 {
+            0%,25%,100% {border-bottom-right-radius: 100% 100%}
+            12% {border-bottom-right-radius: 0% 100%}
+            12.5% {border-bottom-right-radius: 0% 0%}
+            13% {border-bottom-right-radius: 100% 0%}
+        }
+
+        @keyframes angle4 {
+            0%,25%,100% {border-bottom-left-radius: 100% 100%}
+            12% {border-bottom-left-radius: 100% 0%}
+            12.5% {border-bottom-left-radius: 0% 0%}
+            13% {border-bottom-left-radius: 0% 100%}
+        }
+
+/*第二幻灯片*/
+        .new p{
+            display: block;
+            width: 75%;
+            height: 12%;
+            background: #00b38a;
+            position: absolute;
+
+        }
+        .new p span:nth-child(1){
+            font-size: 48px;
+            font-family: zhanku_happy;
+            color: rgb(103, 103, 103);
+            position: absolute;
+            left: 20px;
+            top: 18px;
+        }
+        .new p span:nth-child(2){
+            font-size: 36px;
+            font-family: zhanku_happy;
+            color: rgb(103, 103, 103);
+            position: absolute;
+            right: 20px;
+            bottom: 18px;
+        }
+        .new p:nth-child(1){
+           background: #de7f6a;
+            left: 7%;
+            top: 30%;
+        }
+        .new p:nth-child(2){
+            background: rgb(127, 177, 184);
+            left: 11%;
+            top: 46%;
+        }
+        .new p:nth-child(3){
+            background:rgb(230, 176, 112);
+            left: 14%;
+            top: 62%;
+        }
+        .new p:nth-child(4){
+            background:rgb(147, 186, 97);
+            left: 18%;
+            top: 78%;
+        }
+#main li div#li3,#main li div.li3{
+    width: 500px;
+    height: 500px;
+    z-index: 40;
+   margin: 10% auto;
+    background: #fcf08e;
+    transform: scale(1.8);
+    position: absolute;
+    left: 50%;
+    top: 10%;
+    margin-left: -250px;
+}
+
+        .li3-p h1,.p_h1{
+            font-size: 48px;
+            line-height: 108px;
+            color: rgb(103, 103, 103);
+            width: 80%;
+            position: absolute;
+            z-index: 80;
+            left: 11%;
+            top: 4%;
+            letter-spacing: 5px;
+        }
+        .p_h1{
+            font-size: 44px;
+            text-align: left;
+            top: 38%;
+            letter-spacing: 5px;
+        }
+        .li3-p p{
+    position: absolute;
+            left: 24%;
+            top: 30%;
+       font-size: 38px;
+        font-family: zhanku_happy;
+            color: #fff;
+            z-index: 50;
+ }
+        .li3-p p:nth-child(1){
+            left: 24%;
+            top: 29%;
+        }
+        .li3-p p:nth-child(2){
+            left: 27%;
+            top: 48%;
+        }
+
+        .li3-p p:nth-child(3){
+            left: 56%;
+            top: 40%;
+            font-size: 35px;
+        }
+        .li3-p p:nth-child(4){
+            left: 49%;
+            top: 51%;
+            font-size: 33px;
+        }
+        .li3-p p:nth-child(5){
+            left: 52%;
+            top: 32%;
+            font-size: 32px;
+
+
+        }
+   .li3_box{
+       width: 100%;
+       height: 100%;
+       position: absolute;
+       position: absolute;
+       left: 14px;
+       top: 39px;
+   }
+
+        #loadBox{
+            width: 80%;
+            height: 5%;
+            position: absolute;
+            background: #fff;
+            left: 50%;
+            transform-origin: top;
+            margin-left: -40%;
+            top:50%;
+            border-radius: 10px;
+        }
+        .loading{
+            display: block;
+            height: 100%;
+            width: 0;
+            background: -webkit-linear-gradient(top, rgba(30,87,153,1) 0%,rgba(41,137,216,1) 44%,rgba(32,124,202,1) 69%,rgba(125,185,232,1) 100%);
+            transition: all 2s;
+            -webkit-transition: all 2s;
+            border-radius: 10px;
+        }
+        .word{
+            display: block;
+            height: 100%;
+            width:25%;
+            position: absolute;
+            left: 50%;
+            transform-origin: top;
+            margin-left: -40%;
+            top:-100%;
+            font-size: 40px;
+            color: #fff;
+            transition: all 2s;
+            -webkit-transition: all 2s;
+        }
+
+    </style>
+</head>
+<body>
+<div id="main">
+    <ul id="list">
+        <li class="li1" >
+            <div class="react animated rubberBand ">林秋狄</div>
+              <div class="vita ">
+                  <h1 class="animated bounceInDown">个人</h1>
+                  <h1 class="animated bounceInDown">简历</h1>
+              </div>
+            <div class="loader">
+                <div class="segment-holder">
+                    <div class="segment one"></div>
+                </div>
+                <div class="segment-holder">
+                    <div class="segment two"></div>
+                </div>
+                <div class="segment-holder">
+                    <div class="segment three"></div>
+                </div>
+                <div class="segment-holder">
+                    <div class="segment four"></div>
+                </div>
+            </div>
+        </li>
+        <li class="li2">
+            <div id="container">
+                <div class="quarter" id="item1"></div>
+                <div class="quarter" id="item2"></div>
+                <div class="quarter" id="item3"></div>
+                <div class="quarter" id="item4"></div>
+            </div>
+           <div class="new">
+              <p class="p1   animated fadeInLeft"><span>学历</span><span>本科</span></p>
+               <p class="p2 animated fadeInLeft"><span>专业</span><span>网络工程</span></p>
+               <p class="p3 animated fadeInRight"><span>年龄</span><span>25</span></p>
+               <p class="p4 animated fadeInRight"><span>爱好</span><span>游泳、跑步、敲代码</span></p>
+           </div>
+
+        </li>
+        <li class="li3-p">
+            <div class="li3_box"> <h1 class="animated rotateIn ">已get技能</h1>
+            <p>Ract</p>
+            <p>HTML5</p>
+            <p>Node.js</p>
+            <p>CSS3</p>
+            <p>原生JS</p>
+            <div id="li3"  style="font-size: 48px"></div></div></li>
+        <li><h1 class="p_h1" id="p_h1">待开发技能</h1>
+            <div id="wrap"><div id="loadBox">
+                <span class="word"></span>
+                <span class="loading"></span>
+            </div></div>
+            <div class="button"></div>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/echarts.min.js"></script>
+<script type="text/javascript" src="js/js.js"></script>
